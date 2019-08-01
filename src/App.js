@@ -46,24 +46,20 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      { name: 'Claire', age: 36},
-      { name: 'Tony', age: 64},
-      { name: 'Yuji', age: 4}
+      { id: '573894', name: 'Claire', age: 36},
+      { id: '429389', name: 'Tony', age: 64},
+      { id: '324878', name: 'Yuji', age: 4}
     ],
     otherState: 'some other value',
     showPersons: false
   }
 
-  switchNameHandler = (newName) => {
-    console.log('Was clicked!');
-    // Don't do this -> this.persons[0].name = 'Claire Bear'
-    this.setState({
-      persons: [
-        { name: 'Claire Bear', age: 36},
-        { name: newName, age: 87},
-        { name: 'Yuji', age: 4}
-      ]
-    })
+  deletePersonHandler = (personIndex) => {
+    // Two ways to create a copy of an array
+    // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons});
   }
 
   nameChangedHandler = (event) => {
@@ -95,15 +91,16 @@ class App extends Component {
     if ( this.state.showPersons ) {
       persons = (
         <div>
-          {this.state.persons.map(person => {
-            return <Person 
+          {this.state.persons.map((person, index) => {
+            return <Person
+              click={() => this.deletePersonHandler(index)} 
               name={person.name} 
-              age={person.age} />
+              age={person.age}
+              key={person.id} />
           })}
       </div>
       )
     }
-
 
     return (
       <div className="App">
