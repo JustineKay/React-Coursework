@@ -55,21 +55,40 @@ class App extends Component {
   }
 
   deletePersonHandler = (personIndex) => {
+    console.log('Was clicked!');
     // Two ways to create a copy of an array
+
+    // older
     // const persons = this.state.persons.slice();
+
+    // preferred
     const persons = [...this.state.persons];
+    
     persons.splice(personIndex, 1);
     this.setState({persons: persons});
   }
 
-  nameChangedHandler = (event) => {
-    this.setState( {
-      persons: [
-        { name: 'Claire Bear', age: 36},
-        { name: event.target.value, age: 87},
-        { name: 'Yuji', age: 4}
-      ]
-    })
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+
+    // Two ways to create a copy of a single object
+
+    // older
+    // const person = Object.assign({}, this.state.persons[personIndex]);
+
+    // preferred
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState( {persons: persons} )
   }
 
   togglePersonsHandler = (event) => {
@@ -96,7 +115,8 @@ class App extends Component {
               click={() => this.deletePersonHandler(index)} 
               name={person.name} 
               age={person.age}
-              key={person.id} />
+              key={person.id}
+              changed={(event) => this.nameChangedHandler(event, person.id)} />
           })}
       </div>
       )
