@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Radium from 'radium';
+import Radium, { StyleRoot } from 'radium';
 // import React, { useState } from 'react';
 import './App.css';
 import Person from './Person/Person';
@@ -144,14 +144,16 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
-        <h1>Helloooo, React app here.</h1>
-        <p className={classes.join(' ')}>This is really working!</p>
-        <button 
-          style={style}
-          onClick={this.togglePersonsHandler}>Toggle Peeps</button>
-        {persons}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1>Helloooo, React app here.</h1>
+          <p className={classes.join(' ')}>This is really working!</p>
+          <button 
+            style={style}
+            onClick={this.togglePersonsHandler}>Toggle Peeps</button>
+          {persons}
+        </div>
+      </StyleRoot>
     );
     // The above code does what is described below because it is JSX
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', 'Helllooo, is this thing on??'))
