@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Radium, { StyleRoot } from 'radium';
+import styles from './App.module.css';
 // import React, { useState } from 'react';
-import './App.css';
+// import './App.css';
 import Person from './Person/Person';
 
 
@@ -103,11 +103,7 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
+      cursor: 'pointer'
     }
 
     let persons = null;
@@ -127,25 +123,19 @@ class App extends Component {
       )
 
       style.backgroundColor = 'red';
-
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
     }
 
     // let classes = ['red', 'bold'].join(' ');
     const classes = [];
     if (this.state.persons.length <= 2) {
-      classes.push('red'); // classes = ['red']
+      classes.push(styles.red); // classes = ['red']
     }
     if (this.state.persons.length <= 1) {
-      classes.push('bold'); // classes = ['red', 'bold']
+      classes.push(styles.bold); // classes = ['red', 'bold']
     }
 
     return (
-      <StyleRoot>
-        <div className="App">
+        <div className={styles.App}>
           <h1>Helloooo, React app here.</h1>
           <p className={classes.join(' ')}>This is really working!</p>
           <button 
@@ -153,12 +143,11 @@ class App extends Component {
             onClick={this.togglePersonsHandler}>Toggle Peeps</button>
           {persons}
         </div>
-      </StyleRoot>
     );
     // The above code does what is described below because it is JSX
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', 'Helllooo, is this thing on??'))
   }
 }
 
-export default Radium(App);
+export default App;
 // export default app;
