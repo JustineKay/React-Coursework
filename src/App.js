@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import styles from './App.module.css';
 // import React, { useState } from 'react';
-import './App.css';
+// import './App.css';
 import Person from './Person/Person';
 
 
@@ -97,15 +98,9 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    }
 
     let persons = null;
+    let buttonClass = '';
 
     if ( this.state.showPersons ) {
       persons = (
@@ -120,17 +115,28 @@ class App extends Component {
           })}
       </div>
       )
+
+      buttonClass = styles.red
+    }
+
+    // let classes = ['red', 'bold'].join(' ');
+    const classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push(styles.red); // classes = ['red']
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push(styles.bold); // classes = ['red', 'bold']
     }
 
     return (
-      <div className="App">
-        <h1>Helloooo, React app here.</h1>
-        <p>This is really working!</p>
-        <button 
-          style={style}
-          onClick={this.togglePersonsHandler}>Toggle Peeps</button>
-        {persons}
-      </div>
+        <div className={styles.App}>
+          <h1>Helloooo, React app here.</h1>
+          <p className={classes.join(' ')}>This is really working!</p>
+          <button
+          className={buttonClass} 
+            onClick={this.togglePersonsHandler}>Toggle Peeps</button>
+          {persons}
+        </div>
     );
     // The above code does what is described below because it is JSX
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', 'Helllooo, is this thing on??'))
