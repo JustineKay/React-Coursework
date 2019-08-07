@@ -1,49 +1,8 @@
 import React, { Component } from 'react';
 import styles from './App.module.css';
-// import React, { useState } from 'react';
-// import './App.css';
 import Person from './Person/Person';
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
-
-// const app = props => {
-//   const [personsState, setPersonsState] = useState({
-//     persons: [
-//       { name: 'Claire', age: 36},
-//       { name: 'Tony', age: 64},
-//       { name: 'Yuji', age: 4}
-//     ]
-//   });
-
-//   const [otherState, setOtherState] = useState('To be or not to be?');
-//   console.log(personsState, otherState);
-
-//   const switchNameHandler = () => {
-//     console.log('Was clicked!');
-//     setPersonsState({
-//       persons: [
-//         { name: 'Claire Bear', age: 36},
-//         { name: 'Tony', age: 87},
-//         { name: 'Yuji', age: 4}
-//       ]
-//     })
-
-//     setOtherState({
-//       otherState:'That is not the question'
-//     })
-//   }
-  
-//   return (
-//     <div className="App">
-//       <h1>Helloooo, React app here.</h1>
-//       <p>This is really working!</p>
-//       <button onClick={switchNameHandler}>Switch Name</button>
-//       <Person name={personsState.persons[0].name} age={personsState.persons[0].age}/>
-//       <Person name={personsState.persons[1].name} age={personsState.persons[1].age} >My Hobbies: Feeding stray cats</Person>
-//       <Person name={personsState.persons[2].name} age={personsState.persons[2].age}/>
-//     </div>
-//   );
-// };
 
 class App extends Component {
   state = {
@@ -122,13 +81,12 @@ class App extends Component {
       buttonClass = styles.red
     }
 
-    // let classes = ['red', 'bold'].join(' ');
     const classes = [];
     if (this.state.persons.length <= 2) {
-      classes.push(styles.red); // classes = ['red']
+      classes.push(styles.red);
     }
     if (this.state.persons.length <= 1) {
-      classes.push(styles.bold); // classes = ['red', 'bold']
+      classes.push(styles.bold);
     }
 
     return (
@@ -141,10 +99,7 @@ class App extends Component {
           {persons}
         </div>
     );
-    // The above code does what is described below because it is JSX
-    // return React.createElement('div', {className: 'App'}, React.createElement('h1', 'Helllooo, is this thing on??'))
   }
 }
 
 export default App;
-// export default app;
