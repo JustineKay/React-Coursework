@@ -5,6 +5,11 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor');
+  }
+
   state = {
     persons: [
       { id: '573894', name: 'Claire', age: 36},
@@ -15,6 +20,15 @@ class App extends Component {
     showPersons: false
   }
 
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
+  }
+ 
   deletePersonHandler = (personIndex) => {
     console.log('Was clicked!');
     // Two ways to create a copy of an array
@@ -58,7 +72,7 @@ class App extends Component {
   }
 
   render() {
-
+    console.log('[App.js] render');
     let persons = null;
 
     if ( this.state.showPersons ) {
